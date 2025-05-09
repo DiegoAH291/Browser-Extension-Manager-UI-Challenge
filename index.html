@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/extension-svgrepo-com.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/styles/index.css" />
+    <title>Frontend Mentor | Browser extensions manager UI</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-logo">
+        <img
+          src="./src/assets/extension-svgrepo-com.svg"
+          alt="Browser Extension Manager Logo"
+          title="Browser Extension Manager Logo"
+          class="site-logo__logo"
+        />
+
+        <span class="site-logo__name">Extensions</span>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="extension-panel">
+        <h1 class="extension-panel__title">Extension List</h1>
+        <div class="extension-panel__filters">
+          <button class="filter-button" id="filter-all">All</button>
+          <button
+            class="filter-button filter-button--inactive"
+            id="filter-active"
+          >
+            Active
+          </button>
+          <button
+            class="filter-button filter-button--inactive"
+            id="filter-inactive"
+          >
+            Inactive
+          </button>
+        </div>
+      </section>
+
+      <section class="extension-container" id="extension-container"></section>
+    </main>
+
+    <script type="module" src="./src/libs/index.js"></script>
+  </body>
+</html>

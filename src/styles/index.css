@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-background-light: #f6f8fa;
+  --color-soft-white: #e9ebec;
+  --color-very-soft-white: #daddde;
+  --color-white: #ffff;
+  --color-orange: #ff5b38;
+  --color-soft-orange: #f4461f;
+  --color-shadow: #00000010;
+  --color-dark: #37384d;
+  --color-gray: #797c84;
+}
+
+body {
+  font-size: 14px;
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 500;
+  background-color: var(--color-background-light);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 40px 0;
+  justify-content: space-between;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-soft-white);
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  .site-logo__logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .site-logo__name {
+    color: var(--color-dark);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 800;
+  }
+}
+
+.site-main {
+  width: 100%;
+  padding: 40px;
+}
+
+.extension-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .extension-panel__title {
+    color: var(--color-dark);
+    font-weight: 800;
+    font-size: 1.3em;
+    text-transform: capitalize;
+  }
+}
+
+.extension-panel__filters {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .filter-button {
+    width: 90px;
+    height: 40px;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    cursor: pointer;
+    background-color: var(--color-orange);
+    color: var(--color-background-light);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 10px var(--color-shadow);
+    transition: 0.3s ease all;
+  }
+
+  .filter-button:hover {
+    background-color: var(--color-soft-orange);
+  }
+
+  .filter-button.filter-button--inactive {
+    background-color: transparent;
+    color: var(--color-gray);
+    border: 1px solid var(--color-very-soft-white);
+  }
+
+  .filter-button.filter-button--inactive:hover {
+    color: var(--color-dark);
+  }
+}
+
+.extension-container {
+  display: grid;
+  gap: 5px;
+  padding-top: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-container {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-very-soft-white);
+  width: 330px;
+  height: 150px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px var(--color-shadow);
+}
+
+.card-information {
+  display: flex;
+  gap: 10px;
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.card-data {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  .card-data__name {
+    font-weight: 800;
+    font-size: 1.1em;
+  }
+
+  .card-data__description {
+    font-size: 0.9em;
+    color: var(--color-gray);
+  }
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-actions__remove {
+  width: 70px;
+  height: 30px;
+  text-transform: capitalize;
+  font-size: 0.9em;
+  cursor: pointer;
+  border-radius: 25px;
+  background-color: transparent;
+  color: var(--color-gray);
+  border: 1px solid var(--color-very-soft-white);
+  transition: 0.3s ease all;
+}
+
+.card-actions__remove:hover {
+  color: var(--color-dark);
+}
+
+.card-actions__state {
+  width: 40px;
+  height: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease all;
+  background-color: var(--color-orange);
+
+  .card-actions__state--circle {
+    position: absolute;
+    width: 15px;
+    transition: 0.3s ease all;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    right: 2px;
+    top: 2px;
+  }
+}
+
+.card-actions__state:hover {
+  background-color: var(--color-soft-orange);
+}
+
+.card-actions__state.inactive {
+  width: 40px;
+  height: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  background-color: var(--color-very-soft-white);
+
+  .card-actions__state--circle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    left: 2px;
+    top: 2px;
+  }
+}
+
+.card-actions__state.inactive:hover {
+  background-color: var(--color-gray);
+}
+
+@media screen and (max-width: 520px) {
+  .extension-panel__filters {
+    flex-direction: column;
+  }
+}

@@ -1,11 +1,7 @@
-import data from "../json/data.json";
-
 const btnFilterAll = document.getElementById("filter-all");
 const btnFilterActive = document.getElementById("filter-active");
 const btnFilterInactive = document.getElementById("filter-inactive");
 const extensionContainer = document.getElementById("extension-container");
-
-let extensions = Array.from(data);
 
 const states = {
   all: "all",
@@ -13,15 +9,11 @@ const states = {
   active: "active",
 };
 
+let extensions = [];
 let currentFilter = states.all;
 
 function removeExtension(name) {
-  const newExtension = extensions.filter(
-    (extension) => extension.name !== name
-  );
-
-  extensions = newExtension;
-
+  extensions = extensions.filter((extension) => extension.name !== name);
   filterExtensions(currentFilter);
 }
 
@@ -63,12 +55,12 @@ function createCardExtension(logo, name, description, isActive) {
   const btnSwitchState = document.createElement("div");
   btnSwitchState.role = "button";
   btnSwitchState.className = `${
-    isActive === true ? "card-actions__state" : "card-actions__state inactive"
+    isActive ? "card-actions__state" : "card-actions__state inactive"
   }`;
 
   const btnSwitchStateCircle = document.createElement("div");
   btnSwitchStateCircle.className = `${
-    isActive === true
+    isActive
       ? "card-actions__state--circle"
       : "card-actions__state--circle inactive"
   }`;
@@ -94,10 +86,7 @@ function createCardExtension(logo, name, description, isActive) {
 
 function showAllExtensions() {
   extensionContainer.innerHTML = "";
-
-  extensions.forEach((extension) => {
-    const { logo, name, description, isActive } = extension;
-
+  extensions.forEach(({ logo, name, description, isActive }) => {
     extensionContainer.append(
       createCardExtension(logo, name, description, isActive)
     );
@@ -105,63 +94,53 @@ function showAllExtensions() {
 }
 
 function showExtensionsByStateActive() {
-  const filteredExtensions = extensions.filter(
-    (extension) => extension.isActive === true
-  );
-
   extensionContainer.innerHTML = "";
-
-  filteredExtensions.forEach((extension) => {
-    const { logo, name, description, isActive } = extension;
-
-    extensionContainer.append(
-      createCardExtension(logo, name, description, isActive)
-    );
-  });
+  extensions
+    .filter((extension) => extension.isActive)
+    .forEach(({ logo, name, description, isActive }) => {
+      extensionContainer.append(
+        createCardExtension(logo, name, description, isActive)
+      );
+    });
 }
 
 function showExtensionsByStateInactive() {
-  const filteredExtensions = extensions.filter(
-    (extension) => extension.isActive === false
-  );
-
   extensionContainer.innerHTML = "";
-
-  filteredExtensions.forEach((extension) => {
-    const { logo, name, description, isActive } = extension;
-
-    extensionContainer.append(
-      createCardExtension(logo, name, description, isActive)
-    );
-  });
+  extensions
+    .filter((extension) => !extension.isActive)
+    .forEach(({ logo, name, description, isActive }) => {
+      extensionContainer.append(
+        createCardExtension(logo, name, description, isActive)
+      );
+    });
 }
-
-showAllExtensions();
 
 function filterExtensions(state) {
   currentFilter = state;
 
+  btnFilterAll.classList.toggle(
+    "filter-button--inactive",
+    state !== states.all
+  );
+  btnFilterActive.classList.toggle(
+    "filter-button--inactive",
+    state !== states.active
+  );
+  btnFilterInactive.classList.toggle(
+    "filter-button--inactive",
+    state !== states.inactive
+  );
+
   switch (state) {
     case states.all:
-      btnFilterAll.classList.remove("filter-button--inactive");
-      btnFilterActive.classList.add("filter-button--inactive");
-      btnFilterInactive.classList.add("filter-button--inactive");
       showAllExtensions();
       break;
     case states.active:
-      btnFilterActive.classList.remove("filter-button--inactive");
-      btnFilterAll.classList.add("filter-button--inactive");
-      btnFilterInactive.classList.add("filter-button--inactive");
       showExtensionsByStateActive();
       break;
-
     case states.inactive:
-      btnFilterInactive.classList.remove("filter-button--inactive");
-      btnFilterAll.classList.add("filter-button--inactive");
-      btnFilterActive.classList.add("filter-button--inactive");
       showExtensionsByStateInactive();
       break;
-
     default:
       throw new Error("Error: The status is incorrect or invalid.");
   }
@@ -174,3 +153,19 @@ btnFilterActive.addEventListener("click", () =>
 btnFilterInactive.addEventListener("click", () =>
   filterExtensions(states.inactive)
 );
+
+async function init() {
+  try {
+    const response = await fetch("../../src/json/data.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    extensions = Array.from(data);
+    showAllExtensions();
+  } catch (error) {
+    console.error("Error loading the extensions:", error);
+  }
+}
+
+init();

@@ -13,8 +13,8 @@ This project is a browser extension management interface developed as a practice
 1. **Clone the repository:**
    - 🚀 Open your terminal and run:
      ```bash
-     git clone https://github.com/DiegoAH291/Browser-Extension-Manager-UI-Challenge.git
-     cd Browser-Extension-Manager-UI-Challenge
+     git clone https://github.com/DiegoAH291/Browser-Extension-Manager-UI-Challenge.github.io.git
+     cd Browser-Extension-Manager-UI-Challenge.github.io
      ```
 3. **Install dependencies:**
    - 🛠️ Run the following command to install all dependencies:

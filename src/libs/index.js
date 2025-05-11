@@ -156,7 +156,7 @@ btnFilterInactive.addEventListener("click", () =>
 
 async function init() {
   try {
-    const response = await fetch("../../src/json/data.json");
+    const response = await fetch("https://res.cloudinary.com/dvfihxcwo/raw/upload/v1746987772/odsa8y2dajnoibxc9oeb.json");
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
